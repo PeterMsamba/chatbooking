@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Crucial: Instruct Express to automatically serve static assets from the public folder
+// Instruct Express to automatically serve static assets from the public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve the frontend UI file directly from the backend server root directory
@@ -88,7 +88,7 @@ app.post('/api/check-slots', async (req, res) => {
 // Start the server properly
 app.listen(PORT, () => {
     console.log(`===================================================`);
-    console.log(`🚀 Server running successfully!`);
-    console.log(`🔗 Access your app interface at: http://localhost:${PORT}`);
+    console.log(`Server running successfully!`);
+    console.log(`Access your app interface at: http://localhost:${PORT}`);
     console.log(`===================================================`);
 });
