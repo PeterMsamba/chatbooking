@@ -9,14 +9,16 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-// Serve the frontend UI file directly from the backend server
+// Crucial: Instruct Express to automatically serve static assets from the public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve the frontend UI file directly from the backend server root directory
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // The core web scraping automation engine
 async function checkGoogleCalendar(url) {
-    // Launch browser with a real user-agent string to prevent Google from blocking the headless request
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage({
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -25,22 +27,16 @@ async function checkGoogleCalendar(url) {
     });
 
     try {
-        // Navigate to the Google Calendar link
         await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-
-        // Give the JavaScript inside Google Calendar a safe 4 seconds to render elements
         await page.waitForTimeout(4000);
 
-        // Evaluate the DOM structure to detect interactive booking items
         const result = await page.evaluate(() => {
             const pageText = document.body.innerText.toLowerCase();
 
-            // Check for explicit 'no slots' layout messages
             if (pageText.includes('no available slots') || pageText.includes('no times available') || pageText.includes('nothing available')) {
                 return { status: 'No Slots Found', details: 'Fully Booked' };
             }
 
-            // Look for any standard interactive elements containing a time slot format
             const gridSlots = Array.from(document.querySelectorAll('[role="button"], button')).filter(el => {
                 const label = (el.getAttribute('aria-label') || '').toLowerCase();
                 const text = el.innerText.toLowerCase();
@@ -77,7 +73,6 @@ app.post('/api/check-slots', async (req, res) => {
 
     const results = [];
 
-    // Process links sequentially to avoid crashing your machine's CPU
     for (const url of links) {
         if (url.trim().startsWith('http')) {
             const statusResult = await checkGoogleCalendar(url);

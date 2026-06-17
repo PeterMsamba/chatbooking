@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page - Peter Msamba</title>
+  <meta name="description" content="Peter Msamba's Web Development portfolio and course certificate tracker.">
+  <meta name="author" content="Peter Msamba">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/small.css">
+  <link rel="stylesheet" href="styles/large.css">
+  <script src="scripts/main.js" defer></script>
+</head>
+
+<body>
+
+  <h2>Google Calendar Tracker Dashboard</h2>
+  <p>Paste an appointment link below to monitor</p>
+
+  <div class="add-link-section">
+    <input type="text" id="newLinkInput" placeholder="Paste a new Google Calendar appointment link here...">
+    <button class="add-btn" onclick="addNewLink()">Add Link</button>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>Your Saved Calendars</h3>
+    <div id="linksListContainer"></div>
+  </div>
+
+  <button class="check-btn" id="checkBtn" onclick="checkAllAvailability()">Check Saved Bookings Now</button>
+
+  <div id="results"></div>
+
+</body>
+
+</html>
