@@ -4,8 +4,9 @@
   "description": "Google Calendar Slot Checker",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
-  },
+  "start": "node server.js",
+  "build": "npm install && npx playwright install chromium"
+},
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^4.22.2",
