@@ -1,5 +1,5 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Roboto', sans-serif;
   max-width: 100%;
   margin: 20px auto;
   padding: 15px;
@@ -14,7 +14,7 @@ h2 {
 
 p {
   color: #666;
-  font-size: 14px;
+  font-size: 17px;
   margin-top: 0;
   margin-bottom: 25px;
 }
@@ -37,7 +37,7 @@ p {
   padding: 12px;
   border: 1px solid #dadce0;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
 }
 
@@ -83,7 +83,7 @@ p {
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #f1f3f4;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .link-row:last-child {
